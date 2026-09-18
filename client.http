@@ -1,0 +1,57 @@
+@baseUrl = http://127.0.0.1:8000
+
+###----------------------------------
+### Health Check
+GET {{baseUrl}}/health HTTP/1.1
+content-type: application/json
+
+
+###----------------------------------
+### Fetch Items
+GET {{baseUrl}}/items/?skip=0&limit=100 HTTP/1.1
+content-type: application/json
+
+#### Fetch Item by ID
+GET {{baseUrl}}/items/1 HTTP/1.1
+content-type: application/json
+
+#### Create Item
+POST {{baseUrl}}/items/ HTTP/1.1
+content-type: application/json
+
+{
+  "sku": "RDX-SOX-001",
+  "name": "Red Sox",
+  "description": "Red Sox Description",
+  "quantity": 100,
+  "unit_price": 10.99,
+  "category_id": 3
+}
+
+### Update Item
+PATCH  {{baseUrl}}/items/1 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Cola 12oz - Updated",
+  "description": "Updated Item Description"
+}
+
+### Delete Item (Not implemented yet)
+DELETE {{baseUrl}}/items/1 HTTP/1.1
+content-type: application/json
+
+###----------------------------------
+### Get categories
+GET {{baseUrl}}/categories/ HTTP/1.1
+content-type: application/json
+
+
+### Create Category
+POST {{baseUrl}}/categories/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Tools",
+  "description": "Tools Category"
+}
