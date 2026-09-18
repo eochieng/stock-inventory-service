@@ -85,6 +85,15 @@ curl -X PATCH http://127.0.0.1:8000/items/1 \
 - **Category**: `id`, `name` (unique), `description`, `created_at`, `updated_at`
 - **Item**: `id`, `sku` (unique), `name`, `description`, `quantity` (>= 0), `unit_price` (>= 0), `category_id` (FK), `created_at`, `updated_at`
 
+## Testing
+
+Install dev dependencies and run the unit test suite (uses an in-memory SQLite database, no Postgres required):
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
 ## Migrations
 
 Generate a new migration after changing models in `app/models/`:
