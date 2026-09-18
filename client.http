@@ -12,7 +12,7 @@ GET {{baseUrl}}/items/?skip=0&limit=100 HTTP/1.1
 content-type: application/json
 
 #### Fetch Item by ID
-GET {{baseUrl}}/items/1 HTTP/1.1
+GET {{baseUrl}}/items/5c1a5a2e-3b3a-4b3a-9c3a-2b3a4b3a9c3a HTTP/1.1
 content-type: application/json
 
 #### Create Item
@@ -25,11 +25,11 @@ content-type: application/json
   "description": "Red Sox Description",
   "quantity": 100,
   "unit_price": 10.99,
-  "category_id": 3
+  "category_id": "5c1a5a2e-3b3a-4b3a-9c3a-2b3a4b3a9c3a"
 }
 
 ### Update Item
-PATCH  {{baseUrl}}/items/1 HTTP/1.1
+PATCH  {{baseUrl}}/items/5c1a5a2e-3b3a-4b3a-9c3a-2b3a4b3a9c3a HTTP/1.1
 content-type: application/json
 
 {
@@ -38,7 +38,7 @@ content-type: application/json
 }
 
 ### Delete Item (Not implemented yet)
-DELETE {{baseUrl}}/items/1 HTTP/1.1
+DELETE {{baseUrl}}/items/5c1a5a2e-3b3a-4b3a-9c3a-2b3a4b3a9c3a HTTP/1.1
 content-type: application/json
 
 ###----------------------------------
