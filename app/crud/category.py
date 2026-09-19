@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -5,7 +7,7 @@ from app.models.category import Category
 from app.schemas.category import CategoryCreate, CategoryUpdate
 
 
-def get_category(db: Session, category_id: int) -> Category | None:
+def get_category(db: Session, category_id: uuid.UUID) -> Category | None:
     return db.get(Category, category_id)
 
 

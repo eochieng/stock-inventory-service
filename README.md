@@ -73,17 +73,17 @@ curl -X POST http://127.0.0.1:8000/categories/ \
 
 curl -X POST http://127.0.0.1:8000/items/ \
   -H "Content-Type: application/json" \
-  -d '{"sku": "BEV-001", "name": "Cola 12oz", "quantity": 100, "unit_price": 1.50, "category_id": 1}'
+  -d '{"sku": "BEV-001", "name": "Cola 12oz", "quantity": 100, "unit_price": 1.50, "category_id": "5c1a5a2e-3b3a-4b3a-9c3a-2b3a4b3a9c3a"}'
 
-curl -X PATCH http://127.0.0.1:8000/items/1 \
+curl -X PATCH http://127.0.0.1:8000/items/5c1a5a2e-3b3a-4b3a-9c3a-2b3a4b3a9c3a \
   -H "Content-Type: application/json" \
   -d '{"quantity": 90}'
 ```
 
 ## Schema
 
-- **Category**: `id`, `name` (unique), `description`, `created_at`, `updated_at`
-- **Item**: `id`, `sku` (unique), `name`, `description`, `quantity` (>= 0), `unit_price` (>= 0), `category_id` (FK), `created_at`, `updated_at`
+- **Category**: `id` (UUID), `name` (unique), `description`, `created_at`, `updated_at`
+- **Item**: `id` (UUID), `sku` (unique), `name`, `description`, `quantity` (>= 0), `unit_price` (>= 0), `category_id` (UUID FK), `created_at`, `updated_at`
 
 ## Testing
 

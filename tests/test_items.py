@@ -1,3 +1,6 @@
+import uuid
+
+
 def create_category(client, name="Beverages"):
     response = client.post("/categories/", json={"name": name})
     assert response.status_code == 201
@@ -49,7 +52,7 @@ def test_create_item_defaults_quantity_to_zero(client):
 
 
 def test_create_item_with_missing_category_returns_404(client):
-    response = create_item(client, category_id=999)
+    response = create_item(client, category_id=str(uuid.uuid4()))
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Category not found"
@@ -149,7 +152,7 @@ def test_get_item(client):
 
 
 def test_get_item_not_found_returns_404(client):
-    response = client.get("/items/999")
+    response = client.get(f"/items/{uuid.uuid4()}")
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Item not found"
@@ -196,14 +199,14 @@ def test_update_item_with_missing_category_returns_404(client):
     category = create_category(client)
     created = create_item(client, category["id"]).json()
 
-    response = client.patch(f"/items/{created['id']}", json={"category_id": 999})
+    response = client.patch(f"/items/{created['id']}", json={"category_id": str(uuid.uuid4())})
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Category not found"
 
 
 def test_update_item_not_found_returns_404(client):
-    response = client.patch("/items/999", json={"quantity": 5})
+    response = client.patch(f"/items/{uuid.uuid4()}", json={"quantity": 5})
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Item not found"

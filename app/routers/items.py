@@ -1,3 +1,5 @@
+import uuid
+
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
@@ -22,14 +24,14 @@ def create_item(item_in: ItemCreate, db: Session = Depends(get_db)):
 def list_items(
     skip: int = 0,
     limit: int = 100,
-    category_id: int | None = Query(None),
+    category_id: uuid.UUID | None = Query(None),
     db: Session = Depends(get_db),
 ):
     return crud_item.get_items(db, skip=skip, limit=limit, category_id=category_id)
 
 
 @router.get("/{item_id}", response_model=ItemRead)
-def get_item(item_id: int, db: Session = Depends(get_db)):
+def get_item(item_id: uuid.UUID, db: Session = Depends(get_db)):
     item = crud_item.get_item(db, item_id)
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -37,7 +39,7 @@ def get_item(item_id: int, db: Session = Depends(get_db)):
 
 
 @router.patch("/{item_id}", response_model=ItemRead)
-def update_item(item_id: int, item_in: ItemUpdate, db: Session = Depends(get_db)):
+def update_item(item_id: uuid.UUID, item_in: ItemUpdate, db: Session = Depends(get_db)):
     item = crud_item.get_item(db, item_id)
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")

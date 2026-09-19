@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 from decimal import Decimal
 
@@ -12,7 +13,7 @@ class ItemBase(BaseModel):
     description: str | None = None
     quantity: int = Field(0, ge=0)
     unit_price: Decimal = Field(..., ge=0, max_digits=10, decimal_places=2)
-    category_id: int
+    category_id: uuid.UUID
 
 
 class ItemCreate(ItemBase):
@@ -25,13 +26,13 @@ class ItemUpdate(BaseModel):
     description: str | None = None
     quantity: int | None = Field(None, ge=0)
     unit_price: Decimal | None = Field(None, ge=0, max_digits=10, decimal_places=2)
-    category_id: int | None = None
+    category_id: uuid.UUID | None = None
 
 
 class ItemRead(ItemBase):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    id: uuid.UUID
     created_at: datetime
     updated_at: datetime
     category: CategoryRead

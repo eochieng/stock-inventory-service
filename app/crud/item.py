@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy import Select, select
 from sqlalchemy.orm import Session, joinedload
 
@@ -9,7 +11,7 @@ def _base_query() -> Select[tuple[Item]]:
     return select(Item).options(joinedload(Item.category))
 
 
-def get_item(db: Session, item_id: int) -> Item | None:
+def get_item(db: Session, item_id: uuid.UUID) -> Item | None:
     return db.scalar(_base_query().where(Item.id == item_id))
 
 
@@ -18,7 +20,7 @@ def get_item_by_sku(db: Session, sku: str) -> Item | None:
 
 
 def get_items(
-    db: Session, skip: int = 0, limit: int = 100, category_id: int | None = None
+    db: Session, skip: int = 0, limit: int = 100, category_id: uuid.UUID | None = None
 ) -> list[Item]:
     stmt = _base_query().order_by(Item.name).offset(skip).limit(limit)
     if category_id is not None:

@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -20,6 +21,6 @@ class CategoryUpdate(BaseModel):
 class CategoryRead(CategoryBase):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    id: uuid.UUID
     created_at: datetime
     updated_at: datetime
