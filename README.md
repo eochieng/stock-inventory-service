@@ -102,3 +102,7 @@ Generate a new migration after changing models in `app/models/`:
 alembic revision --autogenerate -m "description of change"
 alembic upgrade head
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE).
